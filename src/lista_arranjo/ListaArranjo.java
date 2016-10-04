@@ -17,9 +17,16 @@ public class ListaArranjo {
         this.lista = new Object[tam];
     }
     
+    public boolean isVazia() {
+        if (ultimo == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public void ampliarLista() {
         this.listaAuxiliar = new Object[tam*2];
-        
         // Copiando os itens do array antigo para o array auxiliar.
         i = 0;
         for (Object aux : lista) {
@@ -38,7 +45,7 @@ public class ListaArranjo {
         }
         
         // Verifica se a lista está cheia.
-        if (this.ultimo > this.tam) {
+        if (this.ultimo == this.tam) {
             this.ampliarLista();
         }
         
@@ -63,8 +70,12 @@ public class ListaArranjo {
     
     // Método que imprime os itens da lista.
     public void imprimirLista() {
-        for (Object aux : lista) {
-            System.out.println(aux);
+        if (this.isVazia()) {
+            System.out.println("A lista está vazia!");
+        } else {
+            for (i = 0; i < ultimo; i++) {
+                System.out.println(this.lista[i]);
+            }
         }
     }
     
