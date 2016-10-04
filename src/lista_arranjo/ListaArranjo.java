@@ -111,7 +111,7 @@ public class ListaArranjo {
     public void alterarItem(int indice, Object item) {
         if (indice < 0 || indice > this.ultimo-1) {
             // Erro!
-        } elsqe {
+        } else {
             this.lista[indice] = item;
         }
     }
