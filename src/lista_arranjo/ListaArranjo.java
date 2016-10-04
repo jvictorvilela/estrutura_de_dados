@@ -74,7 +74,7 @@ public class ListaArranjo {
     }
     
     public Object excluir(int indice) {
-        Object item = null;
+        Object item;
         
         // Verifica possíveis erros.
         if (isVazia()) {
@@ -100,6 +100,21 @@ public class ListaArranjo {
         return item;
     }
     
+    public Object excluirUltimo() {
+        return excluir(ultimo-1);
+    }
+    
+    public Object excluirPrimeiro() {
+        return excluir(0);
+    }
+    
+    public void alterarItem(int indice, Object item) {
+        if (indice < 0 || indice > this.ultimo-1) {
+            // Erro!
+        } elsqe {
+            this.lista[indice] = item;
+        }
+    }
     
     // Método que imprime os itens da lista.
     public void imprimirLista() {
