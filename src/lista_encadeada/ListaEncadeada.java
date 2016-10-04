@@ -2,7 +2,7 @@ package lista_encadeada;
 
 /**
  *
- * @author João Victor
+ * @author João Victor Vilela
  */
 public class ListaEncadeada {
     private Celula primeiraCelula; // Ponteiro para a primeira celula.
@@ -31,8 +31,13 @@ public class ListaEncadeada {
         numeroCelulas++;
     }
     
-    public void excluirItem(int indice) {
-        
+    public Object excluirItem(int indice) {
+        Celula anterior = getCelula(indice-1);
+        Celula atual = anterior.getLink();
+        Celula proxima = atual.getLink();
+        anterior.setLink(proxima);
+        numeroCelulas--;
+        return atual;
     }
     
     public void imprimirLista() {
@@ -58,4 +63,23 @@ public class ListaEncadeada {
             return null;
         }
     }
+    
+    
+    public Celula getCelula(int indice) {
+        if (indice < numeroCelulas && indice > 0) {
+            Celula link = primeiraCelula;
+            if (indice == 0) {
+               return link;
+            } else {
+                for (int i = 0; i < indice; i++) {
+                    link = link.getLink();
+                }
+            }
+            return link;
+        } else {
+            return null;
+        }
+    }
+    
+    
 }

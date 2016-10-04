@@ -23,5 +23,8 @@ public class Principal {
         lista.adicionarItem(16);
         lista.adicionarItem(17);
         lista.imprimirLista();
+        System.out.println("-----------");
+        lista.excluirItem(3);
+        lista.imprimirLista();
     }
 }
