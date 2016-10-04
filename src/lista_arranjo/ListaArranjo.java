@@ -40,7 +40,7 @@ public class ListaArranjo {
     // Método que recebe um índice e um item, e adiciona o item no índice informado.
     public boolean adicionar(int indice, Object item) {
         // Verifica possíveis erros.
-        if (indice < 0 || indice > this.tam) {
+        if (indice < 0 || indice > this.ultimo) {
             return false;
         }
         
@@ -67,6 +67,19 @@ public class ListaArranjo {
     public boolean adicionarFinal(Object item) {
         return this.adicionar(this.ultimo, item);
     }
+    
+    // Método que adiciona item no inicio da lista.
+    public boolean adicionarInicio(Object item) {
+        return this.adicionar(0, item);
+    }
+    
+    //public Object excluir(int indice, Object item) {
+        // Verifica possíveis erros.
+        //if (indice < 0 || indice > this.tam) {
+        //    return false;
+        //}
+    //}
+    
     
     // Método que imprime os itens da lista.
     public void imprimirLista() {
