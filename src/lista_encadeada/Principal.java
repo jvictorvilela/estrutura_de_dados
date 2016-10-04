@@ -25,6 +25,11 @@ public class Principal {
         lista.imprimirLista();
         System.out.println("-----------");
         lista.excluirItem(3);
+        lista.excluirUltimo();
+        lista.excluirUltimo();
+        lista.excluirUltimo();
+        lista.excluirUltimo();
+        lista.excluirUltimo();
         lista.imprimirLista();
     }
 }

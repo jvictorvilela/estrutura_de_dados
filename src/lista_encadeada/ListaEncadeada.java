@@ -31,6 +31,7 @@ public class ListaEncadeada {
         numeroCelulas++;
     }
     
+    
     public Object excluirItem(int indice) {
         Celula anterior = getCelula(indice-1);
         Celula atual = anterior.getLink();
@@ -38,6 +39,10 @@ public class ListaEncadeada {
         anterior.setLink(proxima);
         numeroCelulas--;
         return atual;
+    }
+    
+    public Object excluirUltimo() {
+        return this.excluirItem(numeroCelulas-1);
     }
     
     public void imprimirLista() {
