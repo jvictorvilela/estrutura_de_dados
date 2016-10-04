@@ -43,9 +43,13 @@ public class Lista {
         }
         
         if (indice == this.ultimo) {
-            this.lista[ultimo] = item;
+            this.lista[indice] = item;
         } else {
-            
+            // Realoca os itens da lista
+            for (i = this.ultimo-1; i >= indice; i--) {
+                this.lista[i+1] = this.lista[i];
+            }
+            this.lista[indice] = item;
         }   
         
         ultimo++;
@@ -55,6 +59,12 @@ public class Lista {
     // Método que adiciona item no final da lista.
     public boolean adicionarFinal(Object item) {
         return this.adicionar(this.ultimo, item);
+    }
+    
+    public void imprimirLista() {
+        for (Object aux : lista) {
+            System.out.println(aux);
+        }
     }
     
 }
