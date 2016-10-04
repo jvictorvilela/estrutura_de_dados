@@ -73,12 +73,32 @@ public class ListaArranjo {
         return this.adicionar(0, item);
     }
     
-    //public Object excluir(int indice, Object item) {
+    public Object excluir(int indice) {
+        Object item = null;
+        
         // Verifica possíveis erros.
-        //if (indice < 0 || indice > this.tam) {
-        //    return false;
-        //}
-    //}
+        if (isVazia()) {
+            return null;
+        }
+        if (indice < 0 || indice > this.ultimo) {
+            return null;
+        }
+        
+        item = this.lista[indice];
+        //this.lista[indice] = null;
+        
+        // Realoca os itens, caso precise.
+        if (indice < ultimo-1) {
+            for (i = indice; i < this.ultimo; i++) {
+                this.lista[i] = this.lista[i+1];
+            }
+        }
+        
+        this.lista[ultimo-1] = null;
+        
+        this.ultimo--;
+        return item;
+    }
     
     
     // Método que imprime os itens da lista.

@@ -25,6 +25,7 @@ public class Principal {
         lista.adicionarFinal(10);
         lista.adicionarFinal("testando...");
         lista.adicionar(3, "Uhuu!");
+        System.out.println(lista.excluir(3));
         
         lista.imprimirLista();
     }
