@@ -61,7 +61,7 @@ public class ListaEncadeada {
     }
     
     public Object getItem(int indice) {
-        if (indice < numeroCelulas && indice > 0) {
+        if (indice < numeroCelulas && indice >= 0) {
             Celula link = primeiraCelula;
             if (indice == 0) {
                return link.getConteudo();
