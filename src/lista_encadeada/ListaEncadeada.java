@@ -28,6 +28,7 @@ public class ListaEncadeada {
         novaCelula = new Celula(conteudo);
         novaCelula.setLink(primeiraCelula);
         primeiraCelula = novaCelula;
+        this.numeroCelulas++;
         return true;
     }
     
