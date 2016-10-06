@@ -40,6 +40,31 @@ public class ListaEncadeada {
     
     
     public Object excluirItem(int indice) {
+        
+        // Verificação de possíveis erros.
+        if (indice < 0 || indice >= numeroCelulas) {
+            return null;
+        }
+        
+        if (numeroCelulas == 0) {
+            return null;
+        }
+        
+        if (numeroCelulas == 1) {
+            Celula atual = getCelula(indice);
+            this.primeiraCelula = null;
+            this.numeroCelulas--;
+            return atual;
+        }
+        
+        if (indice == 0) {
+            Celula atual = getCelula(indice);
+            Celula proxima = atual.getLink();
+            this.primeiraCelula = proxima;
+            this.numeroCelulas--;
+            return atual;
+        }
+        
         Celula anterior = getCelula(indice-1);
         Celula atual = anterior.getLink();
         Celula proxima = atual.getLink();
