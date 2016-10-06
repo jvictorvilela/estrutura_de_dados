@@ -12,6 +12,7 @@ public class ListaEncadeada {
     
     public ListaEncadeada() {
         numeroCelulas = 0;
+        primeiraCelula = null;
         celulaAnterior = null;
         novaCelula = null;
     }
@@ -20,8 +21,14 @@ public class ListaEncadeada {
         return numeroCelulas;
     }
     
+    public void adicionarItemInicio(Object conteudo) {
+        novaCelula = new Celula(conteudo);
+        novaCelula.setLink(primeiraCelula);
+        primeiraCelula = novaCelula;
+    }
+    
     public void adicionarItem(Object conteudo) {
-        novaCelula = new Celula (conteudo);
+        novaCelula = new Celula(conteudo);
         if (numeroCelulas == 0) {
             primeiraCelula = novaCelula;
         } else {
