@@ -7,21 +7,21 @@ package fila_circular;
 public class FilaCircular {
     int tam;
     Object[] lista;
-    int t;
-    int f;
+    int tras;
+    int frente;
     public FilaCircular() {
         tam = 6;
         lista = new Object[tam];
-        t = 0;
-        f = 0;
+        tras = 0;
+        frente = 0;
     }
     
    public boolean isVazia() {
-       return t==f;
+       return tras==frente;
    }
    
    public boolean isCheia() {
-       return (t+1)%tam==f;
+       return (tras+1)%tam==frente;
    }
    
    public boolean enfileirar(Object item) {
@@ -29,8 +29,8 @@ public class FilaCircular {
            return false;
        }
        
-       this.lista[t] = item;
-       t = (t+1)%tam;
+       this.lista[tras] = item;
+       tras = (tras+1)%tam;
        return true;
    }
    
@@ -40,8 +40,8 @@ public class FilaCircular {
            return false;
        }
        
-       retorno = lista[f];
-       f = (f+1)%tam;
+       retorno = lista[frente];
+       frente = (frente+1)%tam;
        return retorno;
    }
    
