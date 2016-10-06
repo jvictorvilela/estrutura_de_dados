@@ -11,25 +11,13 @@ package lista_encadeada;
  */
 public class Principal {
     public static void main(String[] args) {
-        ListaEncadeada lista = new ListaEncadeada();
-        lista.adicionarItem(10);
-        lista.adicionarItem(11);
-        lista.adicionarItem(12);
-        lista.adicionarItem(11);
-        lista.adicionarItem(12);
-        lista.adicionarItem(13);
-        lista.adicionarItem(14);
-        lista.adicionarItem(15);
-        lista.adicionarItem(16);
-        lista.adicionarItem(17);
-        lista.imprimirLista();
-        System.out.println("-----------");
-        lista.excluirItem(3);
-        lista.excluirUltimo();
-        lista.excluirUltimo();
-        lista.excluirUltimo();
-        lista.excluirUltimo();
-        lista.excluirUltimo();
-        lista.imprimirLista();
+        Pilha novapilha = new Pilha();
+        novapilha.empilhar("10");
+        novapilha.empilhar("20");
+        novapilha.empilhar("30");
+        novapilha.empilhar("40");
+        novapilha.empilhar("50");
+        System.out.println(novapilha.desempilhar());
+        novapilha.imprimirPilha();
     }
 }
