@@ -54,15 +54,15 @@ public class ListaEncadeada {
             Celula atual = getCelula(indice);
             this.primeiraCelula = null;
             this.numeroCelulas--;
-            return atual;
+            return atual.getConteudo();
         }
         
         if (indice == 0) {
-            Celula atual = getCelula(indice);
+            Celula atual = getCelula(0);
             Celula proxima = atual.getLink();
             this.primeiraCelula = proxima;
             this.numeroCelulas--;
-            return atual;
+            return atual.getConteudo();
         }
         
         Celula anterior = getCelula(indice-1);
@@ -70,7 +70,7 @@ public class ListaEncadeada {
         Celula proxima = atual.getLink();
         anterior.setLink(proxima);
         numeroCelulas--;
-        return atual;
+        return atual.getConteudo();
     }
     
     public Object excluirUltimo() {
@@ -103,7 +103,7 @@ public class ListaEncadeada {
     
     
     public Celula getCelula(int indice) {
-        if (indice < numeroCelulas && indice > 0) {
+        if (indice < numeroCelulas && indice >= 0) {
             Celula link = primeiraCelula;
             if (indice == 0) {
                return link;
