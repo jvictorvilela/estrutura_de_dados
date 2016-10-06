@@ -10,18 +10,18 @@ public class Pilha {
     ListaEncadeada lista;
     
     public Pilha() {
-        lista = new ListaEncadeada();
+        this.lista = new ListaEncadeada();
     }
     
     public boolean empilhar(Object item) {
-        return lista.adicionarItemInicio(item);
+        return this.lista.adicionarItemInicio(item);
     }
     
     public Object desempilhar() {
-        return lista.excluirItem(0);
+        return this.lista.excluirItem(0);
     }
     
     public void imprimirPilha() {
-        lista.imprimirLista();
+        this.lista.imprimirLista();
     }
 }

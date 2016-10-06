@@ -11,13 +11,16 @@ package lista_encadeada;
  */
 public class Principal {
     public static void main(String[] args) {
-        Pilha novapilha = new Pilha();
-        novapilha.empilhar("10");
-        novapilha.empilhar("20");
-        novapilha.empilhar("30");
-        novapilha.empilhar("40");
-        novapilha.empilhar("50");
-        System.out.println(novapilha.desempilhar());
-        novapilha.imprimirPilha();
+        Fila novaFila = new Fila();
+        novaFila.enfileirar("10");
+        novaFila.enfileirar("20");
+        novaFila.enfileirar("30");
+        novaFila.enfileirar("40");
+        novaFila.enfileirar("50");
+        
+        novaFila.imprimirFila();
+        System.out.println(novaFila.desenfileirar());
+        System.out.println("");
+        novaFila.imprimirFila();
     }
 }
