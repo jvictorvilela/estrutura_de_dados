@@ -9,6 +9,7 @@ public class FilaCircular {
     Object[] lista;
     int tras;
     int frente;
+    
     public FilaCircular() {
         tam = 10;
         lista = new Object[tam];
@@ -26,6 +27,7 @@ public class FilaCircular {
    
    public boolean enfileirar(Object item) {
        if (isCheia()) {
+           System.out.println("A fila está cheia!");
            return false;
        }
        
@@ -48,7 +50,7 @@ public class FilaCircular {
    public void imprimirFila() {
        int i = frente;
        while (i != tras-1) {
-           System.out.println(i+" - "+lista[i]);
+           System.out.println(lista[i]);
            i = (i+1)%tam;
        }
    }
