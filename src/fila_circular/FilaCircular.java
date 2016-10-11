@@ -10,7 +10,7 @@ public class FilaCircular {
     int tras;
     int frente;
     public FilaCircular() {
-        tam = 6;
+        tam = 10;
         lista = new Object[tam];
         tras = 0;
         frente = 0;
@@ -46,7 +46,11 @@ public class FilaCircular {
    }
    
    public void imprimirFila() {
-       //
+       int i = frente;
+       while (i != tras-1) {
+           System.out.println(i+" - "+lista[i]);
+           i = (i+1)%tam;
+       }
    }
    
 }
