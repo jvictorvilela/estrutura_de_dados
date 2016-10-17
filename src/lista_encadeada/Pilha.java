@@ -24,4 +24,8 @@ public class Pilha {
     public void imprimirPilha() {
         this.lista.imprimirLista();
     }
+    
+    public boolean isVazia() {
+        return lista.isVazia();
+    }
 }

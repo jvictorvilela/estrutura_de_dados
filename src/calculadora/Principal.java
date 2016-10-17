@@ -7,6 +7,6 @@ package calculadora;
 public class Principal {
     public static void main(String[] args) {
         Calculadora newcalculadora = new Calculadora();
-        System.out.println(newcalculadora.calcular("12312+234"));
+        newcalculadora.calcular("(1+2-3*4)*30");
     }
 }

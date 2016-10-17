@@ -17,6 +17,14 @@ public class ListaEncadeada {
         novaCelula = null;
     }
     
+    public boolean isVazia() {
+        if (numeroCelulas == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public int getNumeroCelulas() {
         return numeroCelulas;
     }
