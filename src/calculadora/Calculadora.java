@@ -37,7 +37,7 @@ public class Calculadora {
         numerosArray = expressaoEntrada.split("\\W");
         
         // Empilha os números, convertendo-os para int.
-        for (int i = (numerosArray.length)-1; i >= 0; i--) {
+        for (int i = 0; i < numerosArray.length; i++) {
             if (!numerosArray[i].isEmpty()) {
                 pilhaNumeros.empilhar(Integer.parseInt(numerosArray[i]));
             }
@@ -49,7 +49,7 @@ public class Calculadora {
         arrayExpressao = expressaoEntrada.split("");
         
         //Procura por caracteres especiais e os coloca na pilha de operações
-        for (int i = (arrayExpressao.length)-1 ; i >= 0 ; i--) {
+        for (int i = 0 ; i < arrayExpressao.length ; i++) {
             if (arrayExpressao[i].contains("+") || arrayExpressao[i].contains("-") || arrayExpressao[i].contains("*") || arrayExpressao[i].contains("/") || arrayExpressao[i].contains("(") || arrayExpressao[i].contains(")")) {
                 pilhaOperacoes.empilhar(arrayExpressao[i]);
             }
