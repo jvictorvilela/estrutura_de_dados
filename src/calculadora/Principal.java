@@ -6,7 +6,8 @@ package calculadora;
  */
 public class Principal {
     public static void main(String[] args) {
+        
         Calculadora newcalculadora = new Calculadora();
-        newcalculadora.calcular("(1+2-3*4)*30");
+        newcalculadora.calcular("(1+2-3)*4*30");
     }
 }

@@ -6,25 +6,27 @@ import lista_encadeada.Pilha;
  * @author João Victor Vilela
  */
 public class Calculadora {
-        private int parAbertos;
-        private String op;
-        private String expressao;
-        private Pilha pilhaNumeros;
-        private Pilha pilhaOperacoes;
-        private Pilha pilhaNumerosFinal;
-        private Pilha pilhaOperacoesFinal;
-        private String[] arrayExpressao;
-        private String[] numerosArray;
-        private Calculadora auxiliar;
-        private float num;
+
         
         public Calculadora() {
             
         }
     
     
-    public float calcular(String expressaoEntrada) {
-        auxiliar = new Calculadora();
+    public static float calcular(String expressaoEntrada) {
+        int parAbertos;
+        String op;
+        String expressao;
+        Pilha pilhaNumeros;
+        Pilha pilhaOperacoes;
+        Pilha pilhaNumerosFinal;
+        Pilha pilhaOperacoesFinal;
+        String[] arrayExpressao;
+        String[] numerosArray;
+        Calculadora auxiliar;
+        float num;
+        
+        //auxiliar = new Calculadora();
         expressao = "";
         pilhaNumeros = new Pilha();
         pilhaOperacoes = new Pilha();
@@ -64,7 +66,7 @@ public class Calculadora {
             op = (String)pilhaOperacoes.desempilhar();
             
             // verifica se existem prioridades na expressão.
-            if (op.equals("(")) {
+            if ("(".equals(op)) {
                 expressao = "";
                 parAbertos = 1;
                 while (parAbertos > 0) {
@@ -84,12 +86,8 @@ public class Calculadora {
                         expressao = expressao+""+op;
                     }
                 }
-                
-                // teste:
-                System.out.println(expressao);
-                // fim teste.
-                
-                pilhaNumerosFinal.empilhar(auxiliar.calcular(expressao));
+                                
+                pilhaNumerosFinal.empilhar(calcular(expressao));
                 
             } else {
                 pilhaOperacoesFinal.empilhar(op);
@@ -101,7 +99,7 @@ public class Calculadora {
         pilhaNumerosFinal.imprimirPilha();
         pilhaOperacoesFinal.imprimirPilha();
         // Resolver pilha Final.
-        return 1;
+        return 0;
     }
     
 }
