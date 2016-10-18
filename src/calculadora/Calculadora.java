@@ -8,14 +8,11 @@ import lista_encadeada.Pilha;
 public class Calculadora {
 
         
-        public Calculadora() {
-            
-        }
     
     
-    public static float calcular(String expressaoEntrada) {
+    public static int calcular(String expressaoEntrada) {
         int parAbertos;
-        String op;
+        String op = null;
         String expressao;
         Pilha pilhaNumeros;
         Pilha pilhaOperacoes;
@@ -24,27 +21,25 @@ public class Calculadora {
         String[] arrayExpressao;
         String[] numerosArray;
         Calculadora auxiliar;
-        float num;
+        int num = 0;
         
-        //auxiliar = new Calculadora();
         expressao = "";
         pilhaNumeros = new Pilha();
         pilhaOperacoes = new Pilha();
         pilhaNumerosFinal = new Pilha();
         pilhaOperacoesFinal = new Pilha();
-        float a = 0;
-        float b = 0;
-        float resultado = 0;
+
+        int resultado = 0;
         parAbertos = 0; //Variável que controla os parenteses abertos.
         
         
         //Guarda apenas os números em um array
         numerosArray = expressaoEntrada.split("\\W");
         
-        // Empilha os números, convertendo-os para float.
+        // Empilha os números, convertendo-os para int.
         for (int i = (numerosArray.length)-1; i >= 0; i--) {
             if (!numerosArray[i].isEmpty()) {
-                pilhaNumeros.empilhar(Float.parseFloat(numerosArray[i]));
+                pilhaNumeros.empilhar(Integer.parseInt(numerosArray[i]));
             }
         }
         
@@ -61,7 +56,7 @@ public class Calculadora {
         }
         
         
-        // Coloca todos os elementos da pilha Final, resolvendo os parenteses.
+        // Coloca todos os elementos na pilha Final, resolvendo os parenteses.
         while (!pilhaNumeros.isVazia()) {
             op = (String)pilhaOperacoes.desempilhar();
             
@@ -70,23 +65,26 @@ public class Calculadora {
                 expressao = "";
                 parAbertos = 1;
                 while (parAbertos > 0) {
-                    num = (float)pilhaNumeros.desempilhar();
+                    
+                    num = (int)pilhaNumeros.desempilhar();
                     expressao = expressao+""+num;
                     op = (String)pilhaOperacoes.desempilhar();
                     
-                    if (op.equals(")")) {
+                    if (")".equals(op)) {
                         if (parAbertos < 1) {
                             expressao = expressao+""+op;
                         }
                         parAbertos--;
                     } else {
-                        if (op.equals("(")) {
+                        if ("(".equals(op)) {
                             parAbertos++;
                         }
                         expressao = expressao+""+op;
                     }
                 }
-                                
+                
+                
+                System.out.println(expressao);
                 pilhaNumerosFinal.empilhar(calcular(expressao));
                 
             } else {
@@ -96,10 +94,57 @@ public class Calculadora {
             }
         }
         
+        // Teste
         pilhaNumerosFinal.imprimirPilha();
         pilhaOperacoesFinal.imprimirPilha();
-        // Resolver pilha Final.
-        return 0;
+        // Fim teste
+        
+        
+        // Resolve pilha Final.
+        
+        // Pequena gambiarra para resolver problema.
+        
+        
+        while (op == null) {
+            op = (String)pilhaOperacoesFinal.desempilhar();
+        }
+        
+        resultado = (int)pilhaNumerosFinal.desempilhar();
+        
+        System.out.println("Pilhas Finais:");
+        pilhaNumerosFinal.imprimirPilha();
+        pilhaOperacoesFinal.imprimirPilha();
+        System.out.println("Fim Pilhas Finais.");
+        
+        while (!pilhaNumerosFinal.isVazia()) {
+            num = (int)pilhaNumerosFinal.desempilhar();
+            //op = (String)pilhaOperacoesFinal.desempilhar();
+            //System.out.println(op);
+            
+            switch (op) {
+                case "+":
+                    resultado = resultado+num;
+                    break;
+                case "-":
+                    resultado = resultado-num;
+                    break;
+                case "*":
+                    resultado = resultado*num;
+                    break;
+                case "/":
+                    System.out.println(resultado+"/"+num+"=");
+                    resultado = resultado/num;
+                    break;
+                default:
+                    System.out.println("Erro!");
+                    break;
+            } 
+
+        }
+
+        
+        
+        return resultado;
     }
     
 }

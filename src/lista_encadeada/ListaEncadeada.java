@@ -60,10 +60,12 @@ public class ListaEncadeada {
         
         // Verificação de possíveis erros.
         if (indice < 0 || indice >= numeroCelulas) {
+            System.out.println("Tentativa de excluir item que não existe!");
             return null;
         }
         
         if (numeroCelulas == 0) {
+            System.out.println("Tentativa de excluir item que não existe!");
             return null;
         }
         

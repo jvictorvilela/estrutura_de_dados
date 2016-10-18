@@ -8,6 +8,7 @@ public class Principal {
     public static void main(String[] args) {
         
         Calculadora newcalculadora = new Calculadora();
-        newcalculadora.calcular("(1+2-3)*4*30");
+        
+        System.out.println(newcalculadora.calcular("5+(6*7)"));
     }
 }
