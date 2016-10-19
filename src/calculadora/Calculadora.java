@@ -1,150 +1,82 @@
 package calculadora;
-import lista_encadeada.Pilha;
+import lista_encadeada.Fila;
 
 /**
  *
  * @author João Victor Vilela
  */
 public class Calculadora {
-
+    public static void calcular(String exp) {
+        String numString = ""; // String para concatenar os números.
+        String opString; // String para guardar as operações
+        String expString = "!"; // String para concatenar as expressões de dentro dos parenteses.
+        String[] expressao; // Array que separa toda a expressão.
+        short parenteses = 0;
         
-    
-    
-    public static int calcular(String expressaoEntrada) {
-        int parAbertos;
-        String op = null;
-        String expressao;
-        Pilha pilhaNumeros;
-        Pilha pilhaOperacoes;
-        Pilha pilhaNumerosFinal;
-        Pilha pilhaOperacoesFinal;
-        String[] arrayExpressao;
-        String[] numerosArray;
-        Calculadora auxiliar;
-        int num = 0;
+        Fila filaNum = new Fila();
+        Fila filaOp = new Fila();
         
-        expressao = "";
-        pilhaNumeros = new Pilha();
-        pilhaOperacoes = new Pilha();
-        pilhaNumerosFinal = new Pilha();
-        pilhaOperacoesFinal = new Pilha();
-
-        int resultado = 0;
-        parAbertos = 0; //Variável que controla os parenteses abertos.
+        expressao = exp.split((""));
         
-        
-        //Guarda apenas os números em um array
-        numerosArray = expressaoEntrada.split("\\W");
-        
-        // Empilha os números, convertendo-os para int.
-        for (int i = 0; i < numerosArray.length; i++) {
-            if (!numerosArray[i].isEmpty()) {
-                pilhaNumeros.empilhar(Integer.parseInt(numerosArray[i]));
-            }
-        }
-        
-        
-        
-        //Separa toda a expressão em um array
-        arrayExpressao = expressaoEntrada.split("");
-        
-        //Procura por caracteres especiais e os coloca na pilha de operações
-        for (int i = 0 ; i < arrayExpressao.length ; i++) {
-            if (arrayExpressao[i].contains("+") || arrayExpressao[i].contains("-") || arrayExpressao[i].contains("*") || arrayExpressao[i].contains("/") || arrayExpressao[i].contains("(") || arrayExpressao[i].contains(")")) {
-                pilhaOperacoes.empilhar(arrayExpressao[i]);
-            }
-        }
-        
-        
-        // Coloca todos os elementos na pilha Final, resolvendo os parenteses.
-        while (!pilhaNumeros.isVazia()) {
-            op = (String)pilhaOperacoes.desempilhar();
+        // Percorre todo o array expressao, separando numeros e operações e separando as expressoes entre parênteses.
+        for (String aux : expressao) {
             
-            // verifica se existem prioridades na expressão.
-            if ("(".equals(op)) {
-                expressao = "";
-                parAbertos = 1;
-                while (parAbertos > 0) {
-                    
-                    num = (int)pilhaNumeros.desempilhar();
-                    expressao = expressao+""+num;
-                    op = (String)pilhaOperacoes.desempilhar();
-                    
-                    if (")".equals(op)) {
-                        if (parAbertos < 1) {
-                            expressao = expressao+""+op;
-                        }
-                        parAbertos--;
-                    } else {
-                        if ("(".equals(op)) {
-                            parAbertos++;
-                        }
-                        expressao = expressao+""+op;
-                    }
-                }
+            // Verifica se é uma operação e se ela está fora dos parênteses.
+            if ((aux.equals("+") || aux.equals("-") || aux.equals("*") || aux.equals("/")) && parenteses == 0) {
+                filaOp.enfileirar(aux);
                 
-                
-                System.out.println(expressao);
-                pilhaNumerosFinal.empilhar(calcular(expressao));
+                // Enfileira os números que estavam sendo concatenados.
+                filaNum.enfileirar(numString);
+                numString = "";
                 
             } else {
-                pilhaOperacoesFinal.empilhar(op);
                 
-                pilhaNumerosFinal.empilhar(pilhaNumeros.desempilhar());
+                // Verifica se está dentro de um parêntese.
+                if (parenteses >= 1) {
+                    if (aux.equals(")")) {
+                        parenteses--;
+                        
+                        // Verifica se acabou a expressão que estava dentro do parêntese.
+                        if (parenteses == 0) {
+                            
+                            // Enfileira toda a expressão dentro da fila dos números.
+                            filaNum.enfileirar(expString);
+                            expString = "!";
+                        } else {
+                            expString = expString+aux;
+                        }
+                        
+                    } else {
+                        expString = expString+aux;
+                    }
+                } else {
+                    if (!aux.equals("(") && !aux.equals("!")) {
+                        numString = numString+aux;
+                    }
+                } 
+                
+                if (aux.equals("(")) {
+                    parenteses++;
+                }
+
             }
         }
         
-        // Teste
-        pilhaNumerosFinal.imprimirPilha();
-        pilhaOperacoesFinal.imprimirPilha();
-        // Fim teste
-        
-        
-        // Resolve pilha Final.
-        
-        // Pequena gambiarra para resolver problema.
-        
-        
-        while (op == null) {
-            op = (String)pilhaOperacoesFinal.desempilhar();
+        // Verifica se restou algum número a direita.
+        if (!numString.isEmpty()) {
+            filaNum.enfileirar(numString);
+            numString = "";
         }
         
-        resultado = (int)pilhaNumerosFinal.desempilhar();
         
-        System.out.println("Pilhas Finais:");
-        pilhaNumerosFinal.imprimirPilha();
-        pilhaOperacoesFinal.imprimirPilha();
-        System.out.println("Fim Pilhas Finais.");
-        
-        while (!pilhaNumerosFinal.isVazia()) {
-            num = (int)pilhaNumerosFinal.desempilhar();
-            //op = (String)pilhaOperacoesFinal.desempilhar();
-            //System.out.println(op);
-            
-            switch (op) {
-                case "+":
-                    resultado = resultado+num;
-                    break;
-                case "-":
-                    resultado = resultado-num;
-                    break;
-                case "*":
-                    resultado = resultado*num;
-                    break;
-                case "/":
-                    System.out.println(resultado+"/"+num+"=");
-                    resultado = resultado/num;
-                    break;
-                default:
-                    System.out.println("Erro!");
-                    break;
-            } 
-
-        }
-
+        // Calcular as filas ....
         
         
-        return resultado;
+        
+        System.out.println("Pilha dos números:");
+        filaNum.imprimirFila();
+        System.out.println("Pilha das operações:");
+        filaOp.imprimirFila();
+        
     }
-    
 }

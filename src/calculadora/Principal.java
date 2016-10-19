@@ -6,9 +6,7 @@ package calculadora;
  */
 public class Principal {
     public static void main(String[] args) {
-        
-        Calculadora newcalculadora = new Calculadora();
-        
-        System.out.println(newcalculadora.calcular("5+(6*7)"));
+                
+        Calculadora.calcular("!2+5*(50*2+(2*3))+3*5");
     }
 }
