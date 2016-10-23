@@ -1,17 +1,22 @@
 package calculadora;
 import lista_encadeada.Fila;
+import java.lang.Math;
 
 /**
  *
  * @author João Victor Vilela
  */
 public class Calculadora {
-    public static void calcular(String exp) {
+    public static float calcular(String exp) {
         String numString = ""; // String para concatenar os números.
         String opString; // String para guardar as operações
         String expString = "!"; // String para concatenar as expressões de dentro dos parenteses.
         String[] expressao; // Array que separa toda a expressão.
         short parenteses = 0;
+        float resultado = 0;
+        String num;
+        String op;
+        float b;
         
         Fila filaNum = new Fila();
         Fila filaOp = new Fila();
@@ -22,7 +27,7 @@ public class Calculadora {
         for (String aux : expressao) {
             
             // Verifica se é uma operação e se ela está fora dos parênteses.
-            if ((aux.equals("+") || aux.equals("-") || aux.equals("*") || aux.equals("/")) && parenteses == 0) {
+            if ((aux.equals("+") || aux.equals("-") || aux.equals("*") || aux.equals("/") || aux.equals("^"))  && parenteses == 0) {
                 filaOp.enfileirar(aux);
                 
                 // Enfileira os números que estavam sendo concatenados.
@@ -69,14 +74,63 @@ public class Calculadora {
         }
         
         
-        // Calcular as filas ....
+        num = (String)filaNum.desenfileirar(); // Desenfileira o primeiro número.
         
+        // Corrige possível erro.
+        if (num.isEmpty()) {
+            num = (String)filaNum.desenfileirar();
+        }
         
+        if (num.contains("!")) {
+            resultado = calcular(num);
+        } else {
+            resultado = Float.parseFloat(num);
+        }
         
-        System.out.println("Pilha dos números:");
-        filaNum.imprimirFila();
-        System.out.println("Pilha das operações:");
-        filaOp.imprimirFila();
+        while (!filaNum.isVazia()) {
+
+            num = (String)filaNum.desenfileirar();
+            op = (String)filaOp.desenfileirar();
+            
+            
+            // Correção de possíveis erros.
+            if (num.isEmpty()) {
+                num = (String)filaNum.desenfileirar();
+            }
+            if (op.isEmpty()) {
+                op = (String)filaOp.desenfileirar();
+            }
+            
+            
+            // Verifica se o número desenfileirado é uma expressão.
+            if (num.contains("!")) {
+                b = calcular(num);
+            } else {
+                b = Float.parseFloat(num);
+            }
+            
+            switch (op) {
+                case "+":
+                    resultado = resultado + b;
+                    break;
+                case "-":
+                    resultado = resultado - b;
+                    break;
+                case "*":
+                    resultado = resultado * b;
+                    break;    
+                case "/":
+                    resultado = resultado / b;
+                    break;
+                case "^":
+                    resultado = (float)Math.pow(resultado,b);
+                    break;
+                default:
+                    System.out.println("Erro! Operação inválida");
+                    return 0;
+            }        
+        } 
         
+        return resultado;
     }
 }

@@ -1,4 +1,5 @@
 package calculadora;
+import java.util.Scanner;
 
 /**
  *
@@ -6,7 +7,8 @@ package calculadora;
  */
 public class Principal {
     public static void main(String[] args) {
-                
-        Calculadora.calcular("!2+5*(50*2+(2*3))+3*5");
+        Scanner input = new Scanner(System.in);
+        System.out.println("Digite uma expressão matemática:");
+        System.out.println(Calculadora.calcular(input.nextLine()));
     }
 }
