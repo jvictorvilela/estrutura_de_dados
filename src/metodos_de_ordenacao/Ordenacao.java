@@ -13,7 +13,7 @@ public class Ordenacao {
         // Percorre todo o array
         for (int i = 0; i < vetor.length; i++) {
             int min = i;
-            // Percorre as posições de n-1
+            // Percorre o array procurando um item menor que "min"
             for (int j = i+1; j < vetor.length; j++) {
                 // Compara o item da posição J com o item "min" e verifica qual o menor.
                 if (vetor[j] < vetor[min]) {
@@ -31,14 +31,18 @@ public class Ordenacao {
     
     
     // Insertion Sort
+    
+    /* 
+    O método começa da posição 1, e a medida que vai percorrendo as outras posiçãos, vai recolocando em seu devido lugar.
+    */
     public static void insertionSort(int vetor[]) {
         int j;
-        for (int i = 1; i < vetor.length; i++) {
-            int x = vetor[i];
+        for (int i = 1; i < vetor.length; i++) { // Percorre todo o array a partir do elemento 1.
+            int x = vetor[i]; // X é o elemento que vai ser colocado na sua posição correta na esquerda do array.
             j = i-1;
-            // Sentinela
-            vetor[0] = x;
-            while (x < vetor[j]) {
+            
+            vetor[0] = x; // Sentinela (A primeira posição do array é a sentinela, o x sempre será colocado nesta posição do array).
+            while (x < vetor[j]) { 
                 vetor[j+1] = vetor[j];
                 j--;
             }
@@ -91,7 +95,7 @@ public class Ordenacao {
     }
 
     private static int separar(int[] vetor, int inicio, int fim) {
-          int posicaoPivo = inicio; // Posição do pivor
+          int posicaoPivo = inicio; // Posição do pivo
           int pivo = vetor[posicaoPivo]; // Valor do pivô
           int i = inicio;
           int f = fim;
@@ -128,6 +132,10 @@ public class Ordenacao {
     }
 
 
+    /*
+    Este método realiza a divisão do vetor recursivamente até que não seja mais possível realizar a divisão.
+    */
+    
     private static void mergeSort(int[] vetor, int[] aux, int left, int right) {
         if( left < right ) {
             int center = (left + right) / 2;
@@ -160,12 +168,13 @@ public class Ordenacao {
             aux[k++] = vetor[right++];
         }
 
-        // Copy tmp back
         for(int i = 0; i < num; i++, rightEnd--) {
             vetor[rightEnd] = aux[rightEnd];
         }
     }
     // Fim Merge Sort
+    
+    
     
     // MySort
     public static void mySort(int[] vetor) {
